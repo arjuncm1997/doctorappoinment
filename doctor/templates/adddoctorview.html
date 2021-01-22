@@ -1,0 +1,54 @@
+
+{% extends 'adminlayout.html'%}
+{% block content %}
+
+
+<div class="main-page">
+  <div class="tables">
+    <h2 class="title1"></h2>
+    <div class="panel-body widget-shadow">
+      <h4> View Doctors:</h4>
+      <table class="table css-serial">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Specialisation</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Contact No</th>
+            <th colspan=2>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for tasks in tasks %}
+          <tr>
+            <td></td>
+            <td>{{ tasks.username }}</td>
+            <td>{{ tasks.specialisation }}</td>
+            <td>{{ tasks.email }}</td>
+            <td>{{ tasks.address }}</td>
+            <td>{{ tasks.phone }}</td>
+            <td><a href="/aeditdoctor/{{tasks.id}}">Edit</a></td>
+            <td><a href='/adddoctordelete/{{tasks.id}}'>Delete</a></td>
+          </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+  
+.css-serial {
+    counter-reset: serial-number;  /* Set the serial number counter to 0 */
+  }
+  
+  .css-serial td:first-child:before {
+    counter-increment: serial-number;  /* Increment the serial number counter */
+    content: counter(serial-number);  /* Display the counter */
+  }
+  
+</style>
+{% endblock %}

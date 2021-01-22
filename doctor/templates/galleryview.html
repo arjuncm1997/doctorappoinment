@@ -1,0 +1,57 @@
+
+{% extends 'adminlayout.html'%}
+{% block content %}
+
+
+<div class="main-page">
+  <div class="tables">
+    <h2 class="title1"></h2>
+    <div class="panel-body widget-shadow">
+      <h4>Your Images</h4>
+      <table class="table css-serial">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th colspan=2></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for tasks in tasks %}
+          <tr>
+            <td></td>
+            <td><span class="image-block">
+                <a class="image-zoom" href="static/pics/{{tasks.image}}" rel="prettyPhoto[gallery]" style="height: 250px;width: 335px;">
+                   <figure>
+                      <img src="static/pics/{{tasks.image}}" class="img-fluid" alt="" style="height: 50px;width: 50px;">
+                      <figcaption>
+                         
+                      </figcaption>
+                   </figure>
+                </a>
+             </span></td>
+            <td>{{ tasks.desc }}</td>
+            <td><a href="/galleryupdate/{{tasks.id}}">Edit</a></td>
+            <td><a href='/gallerydelete/{{tasks.id}}'>Delete</a></td>
+          </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<style>
+  
+.css-serial {
+    counter-reset: serial-number;  /* Set the serial number counter to 0 */
+  }
+  
+  .css-serial td:first-child:before {
+    counter-increment: serial-number;  /* Increment the serial number counter */
+    content: counter(serial-number);  /* Display the counter */
+  }
+  
+</style>
+
+{% endblock %}

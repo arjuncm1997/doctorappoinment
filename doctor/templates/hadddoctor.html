@@ -1,0 +1,42 @@
+{%extends "dlayout.html"%}
+{%block content%}
+<!-- banner -->
+<div class="innerpage-banner">
+	<div class="inner-page-layer">
+	</div>
+</div>
+<!-- //banner -->
+
+<div class="inner_content_info_agileits">
+   <div class="container">
+        <h3 class="heading-agileinfo">ADD Doctor</h3>
+        <div class="modal-body align-w3">
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label>Name of the Doctor</label>
+                    <input type="text" class="form-control" id="disease" name="name"  placeholder="" required="">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" id="symptom" name="email" placeholder="" required="">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" class="form-control" id="category" name="phone" placeholder="" required="">
+                    
+                </div>
+                <div class="form-group">
+                    <label>Specilisation</label>
+                    <input type="text" class="form-control" id="remedy" name="speci" placeholder="" required="">
+                </div>
+                <div class="right-w3l">
+                    <input type="submit" class="form-control bg-theme" value="ADD">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{%endblock%}

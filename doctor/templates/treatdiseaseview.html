@@ -1,0 +1,40 @@
+{% extends 'ulayout.html' %}
+
+{% block content %}
+<br><br>
+<h2><center>Treatments </center></h2><br>
+    <table class="css-serial" border="2" style="width:1002px; margin-left:141px; text-align:center;">
+        <tr style="font-weight: bold;">
+            <th>Id</th>
+            <td>Name</td>
+            <td>Location</td>
+            <td>Disease</td>
+            <td>Contact No</td>
+            <td colspan=2>Action</th>
+        </tr>
+        {% for tasks in tasks %}
+            <tr>
+                <td></td>
+                <td>{{ tasks.name }}</td>
+                <td>{{ tasks.location }}</td>
+                <td>{{ tasks.disease }}</td>
+                <td>{{ tasks.contactno }}</td>
+                <td>Edit</td>
+                <td><a href="/treatdiseasedelete/{{tasks.id}}">Delete</a</td>
+            </tr>
+        {% endfor %}
+    </table>
+<br><br>
+<style>
+    
+.css-serial {
+    counter-reset: serial-number;  /* Set the serial number counter to 0 */
+  }
+  
+  .css-serial td:first-child:before {
+    counter-increment: serial-number;  /* Increment the serial number counter */
+    content: counter(serial-number);  /* Display the counter */
+  }
+  
+</style>
+{% endblock %}

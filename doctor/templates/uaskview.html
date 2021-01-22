@@ -1,0 +1,44 @@
+{% extends 'ulayout.html' %}
+
+{% block content %}
+<div class="innerpage-banner">
+	<div class="inner-page-layer">
+	</div>
+</div>
+
+<h1 style="margin-top: 50px;margin-bottom: 50px;"><center>Queries View</center></h2><br>
+    <table class="css-serial" border="2" style="width:1002px; margin-left:141px; text-align:center;">
+        <tr style="font-weight: bold;">
+            <th>No</th>
+            <td>Disease</td>
+            <td>Doctor</td>
+            <td>Qusetion</td>
+            <td>Answer</td>
+            <td>Action</th>
+        </tr>
+        {% for tasks in tasks %}
+            <tr>
+                <td>{{ tasks.id }}</td>
+                <td>{{ tasks.name }}</td>
+                <td>{{ tasks.doctor }}</td>
+                <td>{{ tasks.question }}</td>
+                <td>{{ tasks.reply }}</td>
+        
+                <td><a href="/uaskdelete/{{tasks.id}}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+<br><br>
+<style>
+    
+.css-serial {
+    counter-reset: serial-number;  /* Set the serial number counter to 0 */
+  }
+  
+  .css-serial td:first-child:before {
+    counter-increment: serial-number;  /* Increment the serial number counter */
+    content: counter(serial-number);  /* Display the counter */
+  }
+  
+</style>
+{% endblock %}

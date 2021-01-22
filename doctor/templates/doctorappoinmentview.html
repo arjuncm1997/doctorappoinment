@@ -1,0 +1,51 @@
+{% extends 'ulayout.html' %}
+
+{% block content %}
+<div class="innerpage-banner">
+	<div class="inner-page-layer">
+	</div>
+</div>
+
+<h1 style="margin-top: 50px;margin-bottom: 50px;"><center>Doctor Appoinments</center></h2><br>
+    <table class="css-serial" border="2" style="width:1002px; margin-left:141px; text-align:center;">
+        <tr style="font-weight: bold;">
+            <th>Id</th>
+            <td>Name</td>
+            <td>Doctor</td>
+            <td>Reason</td>
+            <td>Contact No</td>
+            <td>Date & Time</td>
+            <td>Status</td>
+            <td></th>
+        </tr>
+        {% for tasks in tasks %}
+            <tr>
+                <td></td>
+                <td>{{ tasks.name }}</td>
+                <td>{{ tasks.doctor }}</td>
+                <td>{{ tasks.reason }}</td>
+                <td>{{ tasks.contactno }}</td>
+                <td>{{ tasks.date }}</td>
+                <td>{{ tasks.status }}</td>
+                <td><a href="/doctorappoinmentdelete/{{tasks.id}}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+<br><br>
+
+
+
+<style>
+
+.css-serial {
+    counter-reset: serial-number;  /* Set the serial number counter to 0 */
+  }
+  
+  .css-serial td:first-child:before {
+    counter-increment: serial-number;  /* Increment the serial number counter */
+    content: counter(serial-number);  /* Display the counter */
+  }
+  
+
+</style>
+{% endblock %}
