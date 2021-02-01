@@ -14,8 +14,6 @@
             <th>No</th>
             <th>Name</th>
             <th>Email</th>
-            <th></th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -24,8 +22,6 @@
             <td></td>
             <td>{{ tasks.username }}</td>
             <td>{{ tasks.email }}</td>
-            <td> <a href="/userapprove/{{tasks.id}}"><button>Approve</button></a></td>
-            <td><a href="/userreject/{{tasks.id}}"><button>Reject</button></a></td>
           </tr>
           {% endfor%}
         </tbody>

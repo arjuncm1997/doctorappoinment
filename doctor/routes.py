@@ -43,7 +43,7 @@ def contact():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data, usertype= 'user' ).first()
+        user = User.query.filter_by(email=form.email.data, usertype= 'user',status='approve' ).first()
         user1 = User.query.filter_by(email=form.email.data, usertype= 'hospital',status='approve').first()
         user2 = User.query.filter_by(email=form.email.data, usertype= 'admin').first()
         if user and bcrypt.check_password_hash(user.password,form.password.data):
@@ -463,10 +463,45 @@ def save_picture(form_picture):
     i.thumbnail(output_size)
     i.save(picture_path)
     return picture_fn
+
 @app.route('/userview')
 def userview():
-    tasks = User.query.filter_by(usertype='user').all()
+    tasks = User.query.filter_by(usertype='user',status='null').all()
     return render_template("userview.html",tasks =tasks)
+
+@app.route('/auserapprove')
+def auserapprove():
+    tasks = User.query.filter_by(usertype='user',status='approve').all()
+    return render_template("auserapprove.html",tasks =tasks)
+
+@app.route('/auserreject')
+def auserreject():
+    tasks = User.query.filter_by(usertype='user',status='reject').all()
+    return render_template("auserreject.html",tasks =tasks)
+
+@app.route('/userapprove/<int:id>')
+def userapprove(id):
+    user= User.query.get_or_404(id)
+    user.status='approve'
+    email = user.email
+    db.session.commit()
+    sendmail(email)
+    return redirect('/userview')
+
+@app.route('/userreject/<int:id>')
+def userreject(id):
+    user= User.query.get_or_404(id)
+    user.status='reject'
+    email = user.email
+    db.session.commit()
+    sendmail(email)
+    return redirect('/userview')
+
+def sendmail(email):
+    msg = Message('successful',
+                  recipients=[email])
+    msg.body = f''' Your Account Approved Successfully.... '''
+    mail.send(msg)
 
 @app.route('/uprofile/<int:id>',methods=['GET','POST'])
 def uprofile(id):
@@ -614,14 +649,18 @@ def ahospitalreject():
 def aapprove(id):
     user= User.query.get_or_404(id)
     user.status='approve'
+    email=user.email
     db.session.commit()
+    sendmail(email)
     return redirect('/ahospital')
 
 @app.route('/areject/<int:id>')
 def areject(id):
     user= User.query.get_or_404(id)
     user.status='reject'
+    email=user.email
     db.session.commit()
+    sendmail(email)
     return redirect('/ahospital')
 
 
